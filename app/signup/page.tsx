@@ -1,4 +1,9 @@
 'use client'
+import { signupSchema } from "@/lib/validators";
+import { NextResponse } from "next/server";
+import { hashPassword } from "@/lib/password";
+import { generateVerificationToken } from "@/lib/token";
+import { sendVerificationEmail } from "@/lib/email";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -10,6 +15,7 @@ import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
 import Link from "next/link";
+import z from "zod";
 
 export default function SignUpPage() {
     const router = useRouter();
@@ -17,6 +23,8 @@ export default function SignUpPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
+
+
     
     // Check if user is already logged in
     const { data: session, isPending } = authClient.useSession();
@@ -29,6 +37,10 @@ export default function SignUpPage() {
 
     const handleSignUp = async (e: React.FormEvent) => {
         e.preventDefault();
+        const result = signupSchema.safeParse({name,email,password})
+        if(!result.success){
+            return toast.error(result.error.errors[0].message)
+        }
         setLoading(true);
         console.log("Attempting signup for:", email);
 
