@@ -48,6 +48,8 @@ export const metadata: Metadata = {
  * @param {React.ReactNode} props.children - The child components to be rendered.
  * @returns {JSX.Element} The rendered root layout.
  */
+import Navbar from "@/components/layout/navbar";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -62,7 +64,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <Navbar />
+          <main className="min-h-screen pt-16">
+            {children}
+          </main>
           <Toaster />
         </ThemeProvider>
       </body>

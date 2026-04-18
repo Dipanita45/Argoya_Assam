@@ -20,7 +20,7 @@ export default function SignUpPage() {
     const [loading, setLoading] = useState(false);
 
 
-    
+
     // Check if user is already logged in
     const { data: session, isPending } = authClient.useSession();
 
@@ -32,8 +32,8 @@ export default function SignUpPage() {
 
     const handleSignUp = async (e: React.FormEvent) => {
         e.preventDefault();
-        const result = signupSchema.safeParse({name,email,password})
-        if(!result.success){
+        const result = signupSchema.safeParse({ name, email, password })
+        if (!result.success) {
             return toast.error(result.error.issues[0]?.message || "Invalid signup details")
         }
         setLoading(true);
@@ -89,28 +89,29 @@ export default function SignUpPage() {
     }
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-muted/40 px-4">
-            <Card className="w-full max-w-md shadow-lg border-t-4 border-t-primary">
+        <div className="flex items-center justify-center min-h-[calc(100vh-4rem)] bg-muted/40 px-4 py-8">
+            <Card className="w-full max-w-md shadow-xl border-none ring-1 ring-slate-200">
                 <CardHeader className="space-y-1">
-                    <CardTitle className="text-2xl font-bold text-center">Create an Account</CardTitle>
-                    <CardDescription className="text-center">
+                    <CardTitle className="text-3xl font-bold text-center tracking-tight">Create an Account</CardTitle>
+                    <CardDescription className="text-center text-base">
                         Join Arogya Assam to manage your medical records and find healthcare
                     </CardDescription>
                 </CardHeader>
+
                 <CardContent className="space-y-4">
                     <form onSubmit={handleSignUp} className="space-y-4">
                         <div className="space-y-2">
                             <Label htmlFor="name">Full Name</Label>
                             <div className="relative">
                                 <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                                <Input 
-                                    id="name" 
-                                    type="text" 
-                                    placeholder="John Doe" 
+                                <Input
+                                    id="name"
+                                    type="text"
+                                    placeholder="John Doe"
                                     className="pl-10"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
-                                    required 
+                                    required
                                 />
                             </div>
                         </div>
@@ -118,14 +119,14 @@ export default function SignUpPage() {
                             <Label htmlFor="email">Email</Label>
                             <div className="relative">
                                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                                <Input 
-                                    id="email" 
-                                    type="email" 
-                                    placeholder="name@example.com" 
+                                <Input
+                                    id="email"
+                                    type="email"
+                                    placeholder="name@example.com"
                                     className="pl-10"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    required 
+                                    required
                                 />
                             </div>
                         </div>
@@ -133,14 +134,14 @@ export default function SignUpPage() {
                             <Label htmlFor="password">Password</Label>
                             <div className="relative">
                                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                                <Input 
-                                    id="password" 
-                                    type="password" 
+                                <Input
+                                    id="password"
+                                    type="password"
                                     placeholder="••••••••"
                                     className="pl-10"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    required 
+                                    required
                                     minLength={8}
                                 />
                             </div>
@@ -163,19 +164,19 @@ export default function SignUpPage() {
                                 Or sign up with
                             </span>
                         </div>
-                    </div> 
+                    </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                        <Button 
-                            variant="outline" 
+                        <Button
+                            variant="outline"
                             onClick={() => handleSocialSignUp("google")}
                             disabled={loading}
                         >
                             <Chrome className="mr-2 h-4 w-4" />
                             Google
                         </Button>
-                        <Button 
-                            variant="outline" 
+                        <Button
+                            variant="outline"
                             onClick={() => handleSocialSignUp("github")}
                             disabled={loading}
                         >
