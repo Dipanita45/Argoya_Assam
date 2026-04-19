@@ -1,4 +1,4 @@
-'use client'  
+'use client'
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Github, Chrome, Loader2 } from "lucide-react";
@@ -15,7 +15,7 @@ export default function SignInPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
-    
+
     // Check if user is already logged in
     const { data: session, isPending } = authClient.useSession();
 
@@ -74,43 +74,45 @@ export default function SignInPage() {
     }
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-muted/40 px-4">
-            <Card className="w-full max-w-md shadow-lg border-t-4 border-t-primary">
+        <div className="flex items-center justify-center min-h-[calc(100vh-4rem)] bg-muted/40 px-4 py-8">
+            <Card className="w-full max-w-md shadow-xl border-none ring-1 ring-slate-200">
                 <CardHeader className="space-y-1">
-                    <CardTitle className="text-2xl font-bold text-center">Arogya Assam</CardTitle>
-                    <CardDescription className="text-center">
+                    <CardTitle className="text-3xl font-bold text-center tracking-tight">Arogya Assam</CardTitle>
+                    <CardDescription className="text-center text-base">
                         Enter your credentials to access your patient dashboard
                     </CardDescription>
                 </CardHeader>
+
+
                 <CardContent className="space-y-4">
                     <form onSubmit={handleEmailSignIn} className="space-y-4">
                         <div className="space-y-2">
                             <Label htmlFor="email">Email</Label>
-                            <Input 
-                                id="email" 
-                                type="email" 
-                                placeholder="name@example.com" 
+                            <Input
+                                id="email"
+                                type="email"
+                                placeholder="name@example.com"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                required 
+                                required
                             />
                         </div>
                         <div className="space-y-2">
                             <div className="flex items-center justify-between">
                                 <Label htmlFor="password">Password</Label>
-                                <Link 
-                                    href="/forgot-password" 
+                                <Link
+                                    href="/forgot-password"
                                     className="text-xs text-primary hover:underline"
                                 >
                                     Forgot password?
                                 </Link>
                             </div>
-                            <Input 
-                                id="password" 
-                                type="password" 
+                            <Input
+                                id="password"
+                                type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                required 
+                                required
                             />
                         </div>
                         <Button type="submit" className="w-full" disabled={loading}>
@@ -128,19 +130,19 @@ export default function SignInPage() {
                                 Or continue with
                             </span>
                         </div>
-                    </div> 
+                    </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                        <Button 
-                            variant="outline" 
+                        <Button
+                            variant="outline"
                             onClick={() => handleSocialSignIn("google")}
                             disabled={loading}
                         >
                             <Chrome className="mr-2 h-4 w-4" />
                             Google
                         </Button>
-                        <Button 
-                            variant="outline" 
+                        <Button
+                            variant="outline"
                             onClick={() => handleSocialSignIn("github")}
                             disabled={loading}
                         >
